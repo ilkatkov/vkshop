@@ -44,4 +44,11 @@ class Product extends Model
         return $this->belongsTo(Manufacturer::class, 'manufacturer_id');
     }
 
+    /**
+     * Склады, на которых существует этот товар + стоимость и количество товара на нем
+     */
+    public function warehouses()
+    {
+        return $this->belongsToMany(Warehouse::class)->withPivot('price', 'quantity');
+    }
 }

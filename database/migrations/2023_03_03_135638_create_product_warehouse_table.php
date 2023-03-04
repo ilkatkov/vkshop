@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products_warehouses', function (Blueprint $table) {
+        Schema::create('product_warehouse', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('warehouse_id');
@@ -28,10 +28,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products_warehouses', function (Blueprint $table) {
-            $table->dropForeign('products_warehouses_product_id_foreign');
-            $table->dropForeign('products_warehouses_warehouse_id_foreign');
+        Schema::table('product_warehouse', function (Blueprint $table) {
+            $table->dropForeign('product_warehouse_product_id_foreign');
+            $table->dropForeign('product_warehouse_warehouse_id_foreign');
         });
-        Schema::dropIfExists('products_warehouses');
+        Schema::dropIfExists('product_warehouse');
     }
 };
