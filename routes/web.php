@@ -18,6 +18,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
      * Home Routes
      */
     Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('/tovari/{firstLevel}', 'CategoryController@index')->where('firstLevel', '[A-Za-z]+');
+    Route::get('/tovari/{firstLevel}/{secondLevel}', 'CategoryController@index')->where(['firstLevel'=>'[A-Za-z]+', 'secondLevel'=>'[A-Za-z]+']);
+    Route::get('/tovari/{firstLevel}/{secondLevel}/{thirdLevel}', 'CategoryController@index')->where(['firstLevel'=>'[A-Za-z]+', 'secondLevel'=>'[A-Za-z]+', 'thirdLevel'=>'[A-Za-z]+']);
 
     Route::group(['middleware' => ['guest']], function () {
         /**

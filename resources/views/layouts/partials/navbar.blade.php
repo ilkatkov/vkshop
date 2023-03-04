@@ -14,16 +14,17 @@
             </form>
 
             @auth
-                {{auth()->user()->name}}
+
                 <div class="text-end">
-                    <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Выход</a>
+                    <a class="btn btn-outline-light me-2">{{auth()->user()->name}}</a>
+                    <a href="{{ route('logout.perform') }}" class="btn btn-danger">Выход</a>
                 </div>
             @endauth
 
             @guest
                 <div class="text-end">
-                    <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2">Вход</a>
-                    <a href="{{ route('register.perform') }}" class="btn btn-warning">Регистрация</a>
+                    <a href="{{ route('login.perform') }}" class="btn btn-primary me-2">Вход</a>
+                    <a href="{{ route('register.perform') }}" class="btn btn-secondary">Регистрация</a>
                 </div>
             @endguest
         </div>
