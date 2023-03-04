@@ -4,10 +4,11 @@
     <div class="bg-light p-5 rounded d-grid gap-3">
         @include('layouts.partials.breadcrumbs')
 
-        <form method="post" action="{{ route('register.perform') }}">
+        <form method="POST" action="{{ route('basket.add') }}">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <input type="hidden" id = "quantity-max" value ='{{$quantity}}'>
+            <input type="hidden" name = "productId" value ='{{$item->id}}'>
 
             <h1>{{$item->title}}</h1>
 
@@ -37,7 +38,7 @@
                             <input class="btn btn-primary" type="button" value="+" id="quantity-plus">
                         </div>
 
-                        <p>В наличии:</p>
+                        <p>Наличие в магазинах</p>
 
                         <div role="tabpanel">
                             <div class="list-group" id="myList" role="tablist">

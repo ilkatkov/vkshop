@@ -9,6 +9,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{!! url('assets/bootstrap/css/bootstrap.min.css') !!}" rel="stylesheet">
+    <link href="{!! url('assets/fontawesome/css/fontawesome.css') !!}" rel="stylesheet">
+    <link href="{!! url('assets/fontawesome/css/brands.css') !!}" rel="stylesheet">
+    <link href="{!! url('assets/fontawesome/css/solid.css') !!}" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {

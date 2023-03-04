@@ -17,6 +17,7 @@ class CityController extends Controller
 
     public function setup($cityId)
     {
+        Session::put('basket', null);
         $city = City::find($cityId);
         if (isset($city)){
             Session::put('city', $city->title);

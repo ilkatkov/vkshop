@@ -28,23 +28,28 @@ class ProductController extends Controller
             ];
         }
 
-        $city = City::find(Session::get('cityId'));
-
         $warehouses = [];
         $price = 0;
         $quantity = 0;
 
-        $cities = $product->cities();
-        if (count($cities->get()) > 0) {
-            $price = $cities->wherePivot('city_id', '=', $city->id)->first()->pivot->price;
-        }
+        $city = City::find(Session::get('cityId'));
 
         if (isset($city)) {
-            $warehouses = $product->warehouses->where('city_id', '=', $city->id);
-        }
+            $cities = $product->cities();
 
-        foreach ($warehouses as $warehouse) {
-            $quantity += $warehouse->pivot->quantity;
+            if (count($cities->get()) > 0) {
+                $priceInCity = $cities->wherePivot('city_id', '=', $city->id)->first();
+
+                if (isset($priceInCity)) {
+                    $price = $priceInCity->pivot->price;
+                };
+            }
+
+            $warehouses = $product->warehouses->where('city_id', '=', $city->id);
+
+            foreach ($warehouses as $warehouse) {
+                $quantity += $warehouse->pivot->quantity;
+            }
         }
 
         return view('products.index', [

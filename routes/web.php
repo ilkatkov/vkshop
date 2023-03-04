@@ -47,5 +47,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
 
         Route::get('/basket', 'BasketController@index')->name('basket');
+        Route::post('/basket/add', 'BasketController@add')->name('basket.add');
     });
 });
