@@ -14,8 +14,8 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            @foreach($goods as $item)
-                @include('goods.item', ['item' => $item])
+            @foreach($products as $item)
+                @include('products.item', ['item' => $item])
             @endforeach
         </div>
 

@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Good;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class GoodController extends Controller
+class ProductController extends Controller
 {
-    public function index($itemLink)
+    public function index($productLink)
     {
-        $item = new Good();
-        $item = $item->firstWhere('link', '=', $itemLink);
-        $category = $item->category;
+        $product = new Product();
+        $product = $product->firstWhere('link', '=', $productLink);
+        $category = $product->category;
         $breadcrumbs = array();
 
         if (isset($category->parent->parent)) {
@@ -27,7 +27,7 @@ class GoodController extends Controller
             ];
         }
 
-        return view('goods.index', ['item' => $item, 'category' => $category, 'breadcrumbs' => $breadcrumbs]);
+        return view('products.index', ['item' => $product, 'category' => $category, 'breadcrumbs' => $breadcrumbs]);
 
     }
 }

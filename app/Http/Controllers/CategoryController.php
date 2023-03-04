@@ -30,7 +30,7 @@ class CategoryController extends Controller
             abort(404);
         }
 
-        $goods = $category->goods;
-        return view('categories.index', ['category' => $category, 'childrenCategories' => $childrenCategories, 'breadcrumbs' => $breadcrumbs, 'goods' => $goods]);
+        $products = $category->products;
+        return view('categories.index', ['category' => $category, 'childrenCategories' => $childrenCategories, 'breadcrumbs' => $breadcrumbs, 'products' => $products]);
     }
 }

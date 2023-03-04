@@ -53,7 +53,7 @@ class Category extends Model
     /**
      * Все товары категории
      */
-    public function goods() {
-        return $this->hasMany(Good::class, 'category_id');
+    public function products() {
+        return $this->hasMany(Product::class, 'category_id');
     }
 }

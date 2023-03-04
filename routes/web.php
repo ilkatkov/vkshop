@@ -18,8 +18,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
      * Home Routes
      */
     Route::get('/', 'HomeController@index')->name('home.index');
-    Route::get('/katalog/{category}', 'CategoryController@index')->where('category', '[A-Za-z]+');
-    Route::get('/tovari/{item}', 'GoodController@index')
+    Route::get('/katalog/{categoryLink}', 'CategoryController@index')->where('category', '[A-Za-z]+');
+    Route::get('/tovari/{productLink}', 'ProductController@index');
+    Route::get('/cities', 'CityController@index')->name('cities');
+    Route::get('/cities/{cityId}', 'CityController@show')->name('showCity');
+    Route::get('/cities/set/{cityId}', 'CityController@setup')->name('setCity');
 //        ->where(['item'=>'[A-Za-z]+'])
     ;
 
