@@ -24,4 +24,9 @@ class City extends Model
     {
         return $this->hasMany(Warehouse::class, 'city_id');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

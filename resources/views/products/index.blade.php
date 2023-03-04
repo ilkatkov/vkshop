@@ -11,55 +11,54 @@
 
             <h1>{{$item->title}}</h1>
 
-            <img src="/{{$item->image}}" alt="{{$item->title}}">
+            <img src="{{$item->image}}" alt="{{$item->title}}">
 
             <div>
                 <h6>{{$item->description}}</h6>
             </div>
 
-
+            @guest
+                <p class="lead">Авторизуйтесь для совершения покупок</p>
+            @endguest
 
             <div>
-                @if (count($warehouses) > 0)
+                @if ($quantity > 0)
                     <h6>Стоимость: <u>{{$price}}</u></h6>
                     <h6>На складе: <span>{{$quantity}}</span>  шт.</h6>
 
-                    @guest
-                        <p class="lead">Авторизуйтесь для совершения покупок</p>
-                    @endguest
                     @auth
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Количество</span>
-                        <input type="number" id="quantity" name = "quantity" min="1" max="{{$quantity}}" value="1" class="form-control" aria-label="Sizing example input" aria-describedby="quantity">
-                    </div>
-
-                    <div class="d-grid gap-2 d-md-block">
-                        <input class="btn btn-primary" type="button" value="-" id="quantity-minus">
-                        <input class="btn btn-primary" type="button" value="+" id="quantity-plus">
-                    </div>
-
-                    <p>В наличии:</p>
-
-                    <div role="tabpanel">
-                        <!-- List group -->
-                        <div class="list-group" id="myList" role="tablist">
-                            @foreach($warehouses as $warehouse)
-                                <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#warehouse-{{$warehouse->id}}" role="tab">{{$warehouse->title}}</a>
-                            @endforeach
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Количество</span>
+                            <input type="number" id="quantity" name = "quantity" min="1" max="{{$quantity}}" value="1" class="form-control" aria-label="Sizing example input" aria-describedby="quantity">
                         </div>
 
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            @foreach($warehouses as $warehouse)
-                                <div class="tab-pane fade" id="warehouse-{{$warehouse->id}}" role="tabpanel">{{$city->title}}, {{$warehouse->address}}<br>Осталось: {{$warehouse->pivot->quantity}} шт.</div>
-                            @endforeach
+                        <div class="d-grid gap-2 d-md-block">
+                            <input class="btn btn-primary" type="button" value="-" id="quantity-minus">
+                            <input class="btn btn-primary" type="button" value="+" id="quantity-plus">
                         </div>
-                    </div>
 
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">Добавить в корзину</button>
+                        <p>В наличии:</p>
+
+                        <div role="tabpanel">
+                            <div class="list-group" id="myList" role="tablist">
+                                @foreach($warehouses as $warehouse)
+                                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#warehouse-{{$warehouse->id}}" role="tab">{{$warehouse->title}}</a>
+                                @endforeach
+                            </div>
+
+                            <div class="tab-content">
+                                @foreach($warehouses as $warehouse)
+                                    <div class="tab-pane fade" id="warehouse-{{$warehouse->id}}" role="tabpanel">{{$city->title}}, {{$warehouse->address}}<br>Осталось: {{$warehouse->pivot->quantity}} шт.</div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Добавить в корзину</button>
                     @endauth
+
                 @else
-                    <h6>Стоимость: <u>нет в наличии</u></h6>
+{{--                    <h6>Стоимость: <u><a href="{!! route('cities') !!}">узнать в своем городе</a></u></h6>--}}
+                    <h6>Товара нет в наличии</h6>
                 @endif
             </div>
     </form>
@@ -85,6 +84,5 @@
         } catch (e) {
 
         }
-
     </script>
 @endsection

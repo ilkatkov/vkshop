@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('warehouse_id')->references('id')->on('warehouses');
             $table->integer('quantity');
-            $table->double('price');
             $table->timestamps();
         });
     }

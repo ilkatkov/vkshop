@@ -49,6 +49,14 @@ class Product extends Model
      */
     public function warehouses()
     {
-        return $this->belongsToMany(Warehouse::class)->withPivot('price', 'quantity');
+        return $this->belongsToMany(Warehouse::class)->withPivot('quantity');
+    }
+
+    /**
+     * Города, где товар есть в наличии
+     */
+    public function cities()
+    {
+        return $this->belongsToMany(City::class)->withPivot('price');
     }
 }

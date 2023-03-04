@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
@@ -31,24 +30,21 @@ class ProductController extends Controller
 
         $city = City::find(Session::get('cityId'));
 
-
-
-
         $warehouses = [];
-        $price = null;
+        $price = 0;
         $quantity = 0;
+
+        $cities = $product->cities();
+        if (count($cities->get()) > 0) {
+            $price = $cities->wherePivot('city_id', '=', $city->id)->first()->pivot->price;
+        }
 
         if (isset($city)) {
             $warehouses = $product->warehouses->where('city_id', '=', $city->id);
         }
 
-        if (isset($warehouses)) {
-            if (count($warehouses) > 0) {
-                $price = $warehouses->toArray()[0]['pivot']['price'];
-            }
-            foreach ($warehouses as $warehouse) {
-                $quantity += $warehouse->pivot->quantity;
-            }
+        foreach ($warehouses as $warehouse) {
+            $quantity += $warehouse->pivot->quantity;
         }
 
         return view('products.index', [
