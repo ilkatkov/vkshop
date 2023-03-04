@@ -3,15 +3,7 @@
 @section('content')
     <div class="bg-light p-5 rounded d-grid gap-3">
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Товары</a></li>
-                @foreach($breadcrumbs as $breadcrumb)
-                    <li class="breadcrumb-item"><a href="/katalog/{{$breadcrumb['link']}}">{{$breadcrumb['title']}}</a></li>
-                @endforeach
-                <li class="breadcrumb-item active" aria-current="page">{{$category->title}}</li>
-            </ol>
-        </nav>
+        @include('layouts.partials.breadcrumbs')
 
         <h1>{{$category->title}}</h1>
 
