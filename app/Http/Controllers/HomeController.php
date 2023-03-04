@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Good;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,6 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::with('childrenRecursive')->whereNull('parent_id')->get();
-        return view('home.index', ['categories' => $categories]);
+        $lastGoods = Good::latest()->take(5)->get();
+        return view('home.index', ['categories' => $categories, 'lastGoods' => $lastGoods]);
     }
 }

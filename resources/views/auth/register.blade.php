@@ -4,7 +4,9 @@
     <form method="post" action="{{ route('register.perform') }}">
 
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        <img class="mb-4" src="{!! url('images/bootstrap-logo.svg') !!}" alt="" width="72" height="57">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="/" class="logo nav-link  text-secondary"><img id="vkLogo" src="{!! url('images/logo-blue.svg') !!}" alt="logo"><p>Интернет-магазин</p></a></li>
+        </ul>
 
         <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
 

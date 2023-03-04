@@ -2,6 +2,46 @@
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
+@font-face {
+    font-family: "VK Sans Display";
+    src: url("5795a47e252d16c82bb79fa354b224db.eot"); /* IE9*/
+    src: url("5795a47e252d16c82bb79fa354b224db.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("5795a47e252d16c82bb79fa354b224db.woff2") format("woff2"), /* chrome、firefox */
+    url("5795a47e252d16c82bb79fa354b224db.woff") format("woff"), /* chrome、firefox */
+    url("5795a47e252d16c82bb79fa354b224db.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url("5795a47e252d16c82bb79fa354b224db.svg#VK Sans Display") format("svg"); /* iOS 4.1- */
+}
+
+body {
+    font-family: "VK Sans Display";
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+}
+
+a>p {
+    font-size: 22px;
+    color: white;
+    margin: 0;
+}
+
+#vkLogo {
+    height: 64px;
+    width: 64px;
+    margin-right: 8px;
+}
+
+.categoryLogoMenu {
+    height: 32px;
+    width: 32px;
+    margin-right: 8px;
+}
+
 main > .container {
   padding: 60px 15px 0;
 }

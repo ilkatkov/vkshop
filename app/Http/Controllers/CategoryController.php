@@ -7,47 +7,30 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index($firstLevel, $secondLevel = null, $thirdLevel = null) {
+    public function index($categoryLink) {
         $category = new Category();
         $breadcrumbs = array();
 
-        $firstCheck = $category->firstWhere('link', '=', $firstLevel);
-        if (isset($firstCheck)) {
-            $categoryView = $firstCheck;
-            $childrenCategories = $firstCheck->children;
+        $category = $category->firstWhere('link', '=', $categoryLink);
+        if (isset($category)) {
+            if (isset($category->parent->parent)) {
+                $breadcrumbs[] = [
+                    'title' => $category->parent->parent->title,
+                    'link' => $category->parent->parent->link
+                ];
+            }
+            if (isset($category->parent)) {
+                $breadcrumbs[] = [
+                    'title' => $category->parent->title,
+                    'link' => $category->parent->link
+                ];
+            }
+            $childrenCategories = $category->children;
         } else {
             abort(404);
         }
 
-        if (isset($secondLevel)) {
-            $secondCheck = $category->firstWhere('link', '=', $secondLevel);
-            if ($secondCheck->parent->link == $firstLevel) {
-                $breadcrumbs[] = [
-                    'title' => $firstCheck->title,
-                    'link' => $firstCheck->link
-                ];
-                $categoryView = $secondCheck;
-                $childrenCategories = $secondCheck->children;
-            } else {
-                abort(404);
-            }
-        }
-
-        if (isset($thirdLevel)) {
-            $thirdCheck = $category->firstWhere('link', '=', $thirdLevel);
-            if ($thirdCheck->parent->link == $secondLevel) {
-                $breadcrumbs[] = [
-                    'title' => $secondCheck->title,
-                    'link' => $secondCheck->link
-                ];
-                $categoryView = $thirdCheck;
-                $childrenCategories = $thirdCheck->children;
-            } else {
-                abort(404);
-            }
-        }
-
-        $goods = $categoryView->goods;
-        return view('categories.index', ['category' => $categoryView, 'childrenCategories' => $childrenCategories, 'breadcrumbs' => $breadcrumbs, 'goods' => $goods]);
+        $goods = $category->goods;
+        return view('categories.index', ['category' => $category, 'childrenCategories' => $childrenCategories, 'breadcrumbs' => $breadcrumbs, 'goods' => $goods]);
     }
 }
