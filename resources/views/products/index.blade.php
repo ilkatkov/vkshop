@@ -22,7 +22,7 @@
             @endguest
 
             <div>
-                @if ($quantity > 0)
+                @if ($quantity > 0 && $price > 0)
                     <h6>Стоимость: <u>{{$price}}</u></h6>
                     <h6>На складе: <span>{{$quantity}}</span>  шт.</h6>
 
@@ -55,9 +55,7 @@
 
                         <button class="w-100 btn btn-lg btn-primary" type="submit">Добавить в корзину</button>
                     @endauth
-
                 @else
-{{--                    <h6>Стоимость: <u><a href="{!! route('cities') !!}">узнать в своем городе</a></u></h6>--}}
                     <h6>Товара нет в наличии</h6>
                 @endif
             </div>

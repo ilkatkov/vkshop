@@ -23,8 +23,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     Route::get('/cities', 'CityController@index')->name('cities');
     Route::get('/cities/{cityId}', 'CityController@show')->name('showCity');
     Route::get('/cities/set/{cityId}', 'CityController@setup')->name('setCity');
-//        ->where(['item'=>'[A-Za-z]+'])
-    ;
 
     Route::group(['middleware' => ['guest']], function () {
         /**
@@ -42,9 +40,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     });
 
     Route::group(['middleware' => ['auth']], function () {
-        /**
-         * Logout Routes
-         */
+
+        Route::get('/account', 'AccountController@index')->name('account');
+        Route::post('/account', 'AccountController@edit')->name('account.edit');
+
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
+
+        Route::get('/basket', 'BasketController@index')->name('basket');
     });
 });

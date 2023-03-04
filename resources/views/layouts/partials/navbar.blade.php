@@ -15,8 +15,8 @@
 
             @auth
                 <div class="text-end">
-                    <a class="btn btn-outline-light me-2">{{auth()->user()->name}}</a>
-                    <a href="#" class="btn btn-info me-2">Корзина</a>
+                    <a href="{{ route('account') }}" class="btn btn-outline-light me-2">{{auth()->user()->name}}</a>
+                    <a href="{{ route('basket') }}" class="btn btn-info me-2">Корзина</a>
                     <a href="{{ route('logout.perform') }}" class="btn btn-danger">Выход</a>
                 </div>
             @endauth
