@@ -9,7 +9,10 @@ class AccountController extends Controller
 {
     public function index()
     {
-        return view('account.index');
+        $user = User::find(auth()->user()->id);
+        $orders = (isset($user->orders)) ? $user->orders : null;
+
+        return view('account.index', ['orders' => $orders]);
     }
 
     public function edit(AccountRequest $request) {

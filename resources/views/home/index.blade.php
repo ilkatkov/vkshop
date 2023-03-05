@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="bg-light p-5 rounded d-grid gap-3">
-        <h1>VK Интернет-магазин</h1>
+        <h1>Магазин амбассадоров VK</h1>
         @auth
             @if(auth()->user()->is_admin)
                 <p class="lead">Привет, {{auth()->user()->name}}! (администратор)</p>

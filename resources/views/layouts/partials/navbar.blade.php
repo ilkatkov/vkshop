@@ -6,7 +6,7 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="logo nav-link  text-secondary"><img id="vkLogo" src="{!! url('images/logo-blue.svg') !!}" alt="logo"><p>Интернет-магазин</p></a></li>
+                <li><a href="/" class="logo nav-link  text-secondary"><img id="vkLogo" src="{!! url('images/logo-blue.svg') !!}" alt="logo"><p>Магазин амбассадоров VK</p></a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

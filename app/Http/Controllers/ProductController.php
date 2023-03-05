@@ -31,6 +31,7 @@ class ProductController extends Controller
         $warehouses = [];
         $price = 0;
         $quantity = 0;
+        $cartQuantity = 1;
 
         $city = City::find(Session::get('cityId'));
 
@@ -50,12 +51,21 @@ class ProductController extends Controller
             foreach ($warehouses as $warehouse) {
                 $quantity += $warehouse->pivot->quantity;
             }
+
+            $basket = Session::get('basket');
+            if ($basket !== null) {
+                if (isset($basket[$product->id])){
+                    $cartQuantity = $basket[$product->id];
+                }
+            }
+
         }
 
         return view('products.index', [
             'item' => $product,
             'price' => $price,
             'quantity' => $quantity,
+            'cartQuantity' => $cartQuantity,
             'category' => $category,
             'breadcrumbs' => $breadcrumbs,
             'city' => $city,

@@ -4,7 +4,7 @@
     <div class="bg-light p-5 rounded d-grid gap-3">
         @include('layouts.partials.breadcrumbs')
 
-        <form method="POST" action="{{ route('basket.add') }}">
+        <form method="POST" action="{{ route('basket.add', [$item->id]) }}">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <input type="hidden" id = "quantity-max" value ='{{$quantity}}'>
@@ -28,14 +28,21 @@
                     <h6>На складе: <span>{{$quantity}}</span>  шт.</h6>
 
                     @auth
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">Количество</span>
-                            <input type="number" id="quantity" name = "quantity" min="1" max="{{$quantity}}" value="1" class="form-control" aria-label="Sizing example input" aria-describedby="quantity">
-                        </div>
+                        <div class="d-flex mb-4" style="max-width: 300px">
+                            <button type="button" class="btn btn-primary px-3 me-2"
+                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                <i class="fas fa-minus"></i>
+                            </button>
 
-                        <div class="d-grid gap-2 d-md-block">
-                            <input class="btn btn-primary" type="button" value="-" id="quantity-minus">
-                            <input class="btn btn-primary" type="button" value="+" id="quantity-plus">
+                            <div class="form-outline">
+                                <input id="form1" min="1" name="quantity" max="{{$quantity}}" value="{{$cartQuantity}}" type="number" class="form-control" />
+                                <label class="form-label" for="form1">Количество</label>
+                            </div>
+
+                            <button type="button" class="btn btn-primary px-3 ms-2"
+                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </div>
 
                         <p>Наличие в магазинах</p>
@@ -56,6 +63,8 @@
 
                         <button class="w-100 btn btn-lg btn-primary" type="submit">Добавить в корзину</button>
                     @endauth
+                @elseif (!isset($city))
+                    <p>Для добавления товара в корзину необходимо <a href="{!! route('cities') !!}">выбрать город</a></p>
                 @else
                     <h6>Товара нет в наличии</h6>
                 @endif
@@ -64,24 +73,24 @@
 
     @include('auth.partials.copy')
 
-    <script>
-        let maxQuantity = parseInt(document.getElementById('quantity-max').value);
-        let quantity = document.getElementById('quantity');
-        let quantityPlus = document.getElementById('quantity-plus');
-        let quantityMinus = document.getElementById('quantity-minus');
-        try {
-            quantityPlus.onclick = function() {
-                if (quantity.value < maxQuantity) {
-                    quantity.value = parseInt(quantity.value) + 1;
-                }
-            }
-            quantityMinus.onclick = function() {
-                if (quantity.value > 1) {
-                    quantity.value = parseInt(quantity.value) - 1;
-                }
-            }
-        } catch (e) {
+{{--    <script>--}}
+{{--        let maxQuantity = parseInt(document.getElementById('quantity-max').value);--}}
+{{--        let quantity = document.getElementById('quantity');--}}
+{{--        let quantityPlus = document.getElementById('quantity-plus');--}}
+{{--        let quantityMinus = document.getElementById('quantity-minus');--}}
+{{--        try {--}}
+{{--            quantityPlus.onclick = function() {--}}
+{{--                if (quantity.value < maxQuantity) {--}}
+{{--                    quantity.value = parseInt(quantity.value) + 1;--}}
+{{--                }--}}
+{{--            }--}}
+{{--            quantityMinus.onclick = function() {--}}
+{{--                if (quantity.value > 1) {--}}
+{{--                    quantity.value = parseInt(quantity.value) - 1;--}}
+{{--                }--}}
+{{--            }--}}
+{{--        } catch (e) {--}}
 
-        }
-    </script>
+{{--        }--}}
+{{--    </script>--}}
 @endsection

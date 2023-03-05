@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BasketRequest extends FormRequest
+class OrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class BasketRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'quantity' => 'required|min:1'
+            'total' => 'required|min:1'
         ];
     }
 }

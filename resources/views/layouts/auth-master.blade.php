@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Тестовое задание для вакансии 'Бекенд-разработчик'">
     <meta name="author" content="Ilya Katkov / Илья Катков">
-    <title>VK Интернет-магазин</title>
+    <title>Магазин амбассадоров VK</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{!! url('assets/bootstrap/css/bootstrap.min.css') !!}" rel="stylesheet">

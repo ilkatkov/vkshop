@@ -58,6 +58,14 @@
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Сохранить</button>
         </form>
+        <div>
+            <h2>Ваши заказы</h2>
+            <ul class="list-group list-group-flush">
+                @foreach ($orders as $order)
+                    <li class="list-group-item">Заказ №{{$order->id}} от {{$order->created_at}} - <span style="color:{{$order->status->color}};">{{$order->status->title}}</span></li>
+                @endforeach
+            </ul>
+        </div>
     </div>
     @include('auth.partials.copy')
 @endsection

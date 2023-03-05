@@ -7,7 +7,9 @@
         @if (!isset($products))
             <p>Корзина пуста</p>
         @else
-            <div class="row d-flex justify-content-center my-4">
+            <form class="row d-flex justify-content-center my-4" method="get" action="{{route('order.add')}}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="total" value="{{ $total }}" />
                 <div class="col-md-8">
                     <div class="card mb-4">
                         <div class="card-body">
@@ -24,38 +26,19 @@
                                 </div>
 
                                 <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                                    <p><strong>{{$products[$i]->title}}</strong></p>
-                                    <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                                    <p><a href="{{route('product.show', [$products[$i]->link])}}"><strong>{{$products[$i]->title}}</strong></a></p>
+                                    <button type="button" class="btn btn-danger btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
                                             title="Remove item">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
-                                            title="Move to the wish list">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
                                 </div>
 
-                                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                <div class="col-lg-4 col-md-2 mb-4 mb-lg-0">
                                     <div class="d-flex mb-4" style="max-width: 300px">
-                                        <button class="btn btn-primary px-3 me-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-
-                                        <div class="form-outline">
-                                            <input id="form1" min="0" name="quantity" value="{{$quantities[$i]}}" type="number" class="form-control" />
-                                            <label class="form-label" for="form1">Количество</label>
-                                        </div>
-
-                                        <button class="btn btn-primary px-3 ms-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
+                                        <p class="text-start text-md-center">
+                                            <strong>{{$quantities[$i]}} * {{$products[$i]->cities()->wherePivot('city_id', '=', $city->id)->first()->pivot->price}} = {{$quantities[$i] * $products[$i]->cities()->wherePivot('city_id', '=', $city->id)->first()->pivot->price}}</strong>
+                                        </p>
                                     </div>
-
-                                    <p class="text-start text-md-center">
-                                        <strong>Цена</strong>
-                                    </p>
                                 </div>
                             </div>
                             <hr class="my-4" />
@@ -77,17 +60,17 @@
                                         <div>
                                             <strong>Общая стоимость</strong>
                                         </div>
-                                        <span><strong>13700</strong></span>
+                                        <span><strong>{{$total}}</strong></span>
                                     </li>
                                 </ul>
-                                <button type="button" class="btn btn-primary btn-lg btn-block">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">
                                     Подтвердить заказ
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
             @endif
         </div>
     @include('auth.partials.copy')
